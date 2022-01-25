@@ -1,0 +1,111 @@
+@import "../../styles/styles.scss";
+
+.fishPopup {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    display: grid;
+    place-items: center;
+    background-color: $gray-basket;
+}
+
+.fishPopup__content {
+    position: relative;
+    width: 760px;
+    background-color: white;
+    border-radius: 32px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 50px 73px;
+
+    .fishPopup__close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 51px;
+        height: 51px;
+        border-radius: 50%;
+        background-color: $white-dark;
+        display: grid;
+        place-items: center;
+        transform: translate(50%, -50%);
+        cursor: pointer;
+    }
+
+    .fishPopup__header {
+        font-family: $neutralface-bold;
+        font-size: $font-20;
+        font-weight: bold;
+        color: $gray-1;
+        margin-bottom: 32px;
+        text-transform: uppercase;
+    }
+
+    .fishPopup__items {
+        width: 100%;
+
+        .fishPopup__item {
+            width: 100%;
+            height: 71px;
+            display: grid;
+            grid-template-columns: 35% 65%;
+            box-sizing: border-box;
+            
+            &:not(:last-child) {
+                margin-bottom: 15px;
+            }
+
+            .fishPopup__itemName {
+                text-transform: uppercase;
+                font-family: $neutralface-regular;
+                font-size: $font-20;
+                color: $gray-1;
+                width: 35%;
+            }
+
+            .fishPopup__itemContent {
+                font-family: $inter;
+                font-size: $font-14;
+                color: $gray-1;
+            }
+
+            .fish__delete {
+                transform: translate(0, 2px);
+                cursor: pointer;
+            }
+        }
+    }
+
+    .fishPopup__code {
+        font-family: $inter;
+        font-size: $font-14;
+        color: $gray-1;
+        width: 100%;
+        padding: 25px 30px;
+        background-color: $gray-6;
+        border-radius: 15px;
+    }
+
+    .basket__price {
+        font-family: $inter;
+        font-size: $font-18;
+        color: black;
+        margin-top: 24px;
+        margin-bottom: 38px;
+    }
+
+    button {
+        width: 100%;
+        font-family: $inter;
+        font-size: $font-20;
+        background-color: $dark-blue;
+        border-radius: 15px;
+        box-sizing: border-box;
+        padding: 20px;
+        border: none;
+    }
+}

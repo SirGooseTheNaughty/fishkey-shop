@@ -1,0 +1,10 @@
+@import "./styles/styles.scss";
+
+main {
+  display: grid;
+  width: 1160px;
+  margin: 0 auto;
+  margin-top: 220px;
+  grid-template-columns: $col-grid-12;
+  grid-column-gap: $col-gap-12;
+}

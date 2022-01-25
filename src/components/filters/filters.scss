@@ -1,0 +1,57 @@
+@import "../../styles/styles.scss";
+
+.filters {
+    position: sticky;
+    top: 220px;
+    grid-column: 1 / 4;
+    height: 440px;
+    box-sizing: border-box;
+    padding: 60px 29px;
+    background-color: $white-dark;
+    border-radius: 30px;
+
+    &__header {
+        font-family: $neutralface-bold;
+        font-size: $font-20;
+        color: $gray-1;
+        font-weight: 800;
+        margin-bottom: 24px;
+    }
+
+    &__tags {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: baseline;
+    }
+
+    &__tag {
+        position: relative;
+        padding: 5px 17px;
+        margin-right: 11px;
+        margin-top: 11px;
+        background-color: white;
+        border-radius: 6px;
+        font-family: $inter;
+        font-size: $font-18;
+        cursor: pointer;
+
+        &.disabled {
+            cursor: not-allowed;
+        }
+    }
+
+    &__number {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(50%, -50%);
+        font-size: 12px;
+        width: 15px;
+        height: 15px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background-color: $white-dark;
+        border-color: $gray-1;
+    }
+}

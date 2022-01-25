@@ -1,0 +1,109 @@
+@import "../../../styles/styles.scss";
+
+.fish {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    background-color: #E4EFF6;
+    padding: 36px 30px;
+    border-radius: 30px;
+    height: max-content;
+    max-height: 280px;
+    min-height: 280px;
+
+    &.extended {
+        height: max-content;
+
+        .description {
+            -webkit-line-clamp: initial;
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+        height: 100%;
+        margin-bottom: 90px;
+        margin-top: 30px;
+    }
+
+    .videoLink {
+        display: grid;
+        place-items: center;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70px;
+        height: 70px;
+        // temporary
+        background-color: bisque;
+        border-radius: 50%;
+    }
+
+    .title {
+        font-family: $neutralface-regular;
+        font-size: $font-20;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: black;
+    }
+
+    .description {
+        font-family: $inter;
+        font-size: $font-14;
+        font-weight: 200;
+        color: $gray-1;
+        margin-top: 15px;
+        // display: -webkit-box;
+        // -webkit-line-clamp: 3;
+        // -moz-box-orient: vertical;
+        // -webkit-box-orient: vertical;
+        // overflow: hidden;
+    }
+
+    .toInstruction,
+    .priceAndBasket {
+        position: absolute;
+        bottom: 0;
+        width: calc(100% - 30px*2);
+        margin-bottom: 30px;
+        font-family: $inter;
+        margin-top: 18px;
+    }
+
+    .toInstruction {
+        height: 60px;
+        background-color: white;
+        border-radius: 15px;
+        display: grid;
+        place-items: center;
+        font-size: $font-20;
+        cursor: pointer;
+    }
+
+    .priceAndBasket {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .price {
+            font-size: $font-20;
+            color: $gray-1;
+        }
+
+        .fish__basket {
+            position: relative;
+            display: grid;
+            place-items: center;
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border-radius: 16px;
+            font-size: $font-12;
+            cursor: pointer;
+        }
+    }
+}

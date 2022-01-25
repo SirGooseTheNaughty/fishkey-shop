@@ -1,0 +1,83 @@
+@import "../../styles/styles.scss";
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    background-color: $white-dark;
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+
+    .content {
+        width: 1160px;
+        height: 110px;
+        margin: 0 auto;
+        display: grid;
+        place-items: center baseline;
+        grid-template-columns: $col-grid-12;
+        grid-column-gap: $col-gap-12;
+    
+        .link {
+            display: grid;
+            place-items: center baseline;
+            font-family: $neutralface-regular;
+            font-size: $font-20;
+            color: $gray-1;
+            font-weight: 600;
+    
+            &.base-instruction {
+                grid-column: 1 / span 3;
+            }
+    
+            &.tech-support {
+                grid-column: 4 / span 3;
+            }
+        }
+
+        .header__login {
+            position: relative;
+            grid-column: 11;
+            display: grid;
+            place-items: center;
+            width: 60px;
+            height: 60px;
+            background-color: $gray-2;
+            border-radius: 16px;
+            font-family: $inter;
+            font-size: $font-12;
+            overflow: hidden;
+
+            .fullsize {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    
+        .header__basket {
+            position: relative;
+            grid-column: 12;
+            display: grid;
+            place-items: center;
+            width: 60px;
+            height: 60px;
+            background-color: $gray-2;
+            border-radius: 16px;
+            font-family: $inter;
+            font-size: $font-12;
+    
+            span {
+                position: absolute;
+                display: grid;
+                place-items: center;
+                width: 26px;
+                height: 26px;
+                background-color: $cart-number;
+                border-radius: 50%;
+                top: 100%;
+                left: 0;
+                transform: translate(-30%, -70%);
+            }
+        }
+    }
+}

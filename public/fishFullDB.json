@@ -1,0 +1,118 @@
+[
+    {
+        "id": "full-page-hor-scroll",
+        "warning": "астарожна!",
+        "prep": "в Тильде верстаются все блоки. Если в блоках есть картинки, им лучше отключить lazy-load.",
+        "params": [
+            {
+                "param": "blocks",
+                "desc": "id всех активных блоков"
+            },
+            {
+                "param": "minWidth",
+                "desc": "минимальная ширина экрана для инициализации [1200]"
+            },
+            {
+                "param": "animTime",
+                "desc": "время смены блоков в секундах"
+            }
+        ],
+        "code": "<script>\r\nscreenChangeOnScroll_init({\r\nblocks: '#rec271808669, #rec271808669', // id блоков\r\nminWidth: 1200, // минимальная ширина экрана для анимации\r\nanimTime: 0.8 // время смены блока (в секундах)\r\n})\r\n</script>"
+    },
+    {
+        "id": "blocks-hor-scroll",
+        "warning": "",
+        "prep": "prep",
+        "params": [
+            {
+                "param": "1",
+                "desc": "desc 1"
+            },
+            {
+                "param": "2",
+                "desc": "desc 2"
+            },
+            {
+                "param": "3",
+                "desc": "desc 3"
+            },
+            {
+                "param": "4",
+                "desc": "desc 4"
+            }
+        ],
+        "code": "<script>\ncode goes here\n</script>"
+    },
+    {
+        "id": "italic-text",
+        "warning": "",
+        "prep": "prep",
+        "params": [
+            {
+                "param": "1",
+                "desc": "desc 1"
+            },
+            {
+                "param": "2",
+                "desc": "desc 2"
+            },
+            {
+                "param": "3",
+                "desc": "desc 3"
+            },
+            {
+                "param": "4",
+                "desc": "desc 4"
+            }
+        ],
+        "code": "<script>\ncode goes here\n</script>"
+    },
+    {
+        "id": "cursor-mask",
+        "warning": "",
+        "prep": "prep",
+        "params": [
+            {
+                "param": "1",
+                "desc": "desc 1"
+            },
+            {
+                "param": "2",
+                "desc": "desc 2"
+            },
+            {
+                "param": "3",
+                "desc": "desc 3"
+            },
+            {
+                "param": "4",
+                "desc": "desc 4"
+            }
+        ],
+        "code": "<script>\ncode goes here\n</script>"
+    },
+    {
+        "id": "button-to-circle",
+        "warning": "",
+        "prep": "prep",
+        "params": [
+            {
+                "param": "1",
+                "desc": "desc 1"
+            },
+            {
+                "param": "2",
+                "desc": "desc 2"
+            },
+            {
+                "param": "3",
+                "desc": "desc 3"
+            },
+            {
+                "param": "4",
+                "desc": "desc 4"
+            }
+        ],
+        "code": "<script>\ncode goes here\n</script>"
+    }
+]

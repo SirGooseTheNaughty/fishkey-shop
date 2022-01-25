@@ -1,0 +1,6 @@
+.fishContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 260px);
+    grid-column-gap: 40px;
+    grid-row-gap: 80px;
+}

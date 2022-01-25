@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'neutral_faceregular';
+    src: url('../fonts/neutralface-webfont.woff2') format('woff2'),
+         url('../fonts/neutralface-webfont.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'neutral_facebold';
+    src: url('../fonts/neutralface-webfont.woff2') format('woff2'),
+         url('../fonts/neutralface-webfont.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+// fonts
+$neutralface-regular: 'neutral_faceregular', sans-serif;
+$neutralface-bold: 'neutral_facebold', sans-serif;
+$inter: 'inter', sans-serif;
+
+// font-sizes
+$font-12: 12px;
+$font-14: 14px;
+$font-18: 18px;
+$font-20: 20px;
+
+// grid
+$col-grid-12: repeat(12, 60px);
+$col-gap-12: 40px;
+
+// colors
+$white-dark: #F5F5F5;
+$gray-1: #333333;
+$gray-2: #E0E0E0;
+$gray-6: #F2F2F2;
+$gray-basket: rgba(196,196,196,0.1);
+$cart-number: #ACCBE1;
+$light-blue: #E4EFF6;
+$dark-blue: #ACCBE1;
