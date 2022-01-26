@@ -1,5 +1,6 @@
 import './App.scss';
 import { useState, useEffect, createContext } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import { Header } from "./components/header/Header";
 import { Filters } from "./components/filters/Filters";
 import { FishContainer } from "./components/fishes/FishContainer";
@@ -8,11 +9,20 @@ import { FishPopup } from "./components/fishPopup/FishPopup";
 import { Login } from "./components/loginPopup/Login";
 import { getAuth } from "firebase/auth";
 import { fetchFishes, fetchOwnedFishes, mergeFishData } from './services/DataService';
+import { getFilteredFishes } from './services/DataFlowService';
 import useBasket from './hooks/useBasket';
 import useTags from './hooks/useTags';
 import useUser from './hooks/useUser';
+import usePopup from './hooks/usePopup';
 
-export const BasketContext = createContext({ basketIds: null, addId: null, removeId: null, toggleId: null, ownedFishes: null });
+export const Context = createContext({
+  basketIds: null,
+  addId: null,
+  removeId: null,
+  toggleId: null,
+  ownedFishes: null,
+  setFishPopup: null
+});
 
 const App = () => {
   const [firebaseUser, ownedFishes, userIcon] = useUser();
@@ -21,6 +31,7 @@ const App = () => {
   const [basketIds, toggleId, isBasketShown, setIsBasketShown] = useBasket();
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [tags, toggleTag] = useTags();
+  const [popupFishData, isFishPopupOpened, setFishPopup] = usePopup(fishes);
 
   useEffect(() => {
     if (!fishes.length) {
@@ -33,34 +44,28 @@ const App = () => {
   useEffect(() => {
     const auth = getAuth();
     if (auth.currentUser && showLoginPopup) {
-      setShowLoginPopup(false);
+      setShouldFetchFullFishes(true);
+      if (showLoginPopup) {
+        setShowLoginPopup(false);
+      }
     }
   }, [firebaseUser]);
   
   useEffect(() => {
     if (shouldFetchFullFishes && fishes.length) {
-      fetchOwnedFishes()
+      fetchOwnedFishes(firebaseUser)
         .then(data => mergeFishData(fishes, data))
         .then(fishes => setFishes(fishes))
         .catch(err => console.error(err))
         .finally(() => setShouldFetchFullFishes(false));
     }
-  }, [ownedFishes, fishes, shouldFetchFullFishes]);
+  }, [ownedFishes, fishes, shouldFetchFullFishes, firebaseUser]);
 
-  const currentFishes = tags.size
-    ? fishes.filter(fish => {
-      for (const tag of tags) {
-        if (!fish.tags.includes(tag)) {
-          return false;
-        }
-      }
-      return true;
-    })
-    : fishes;
+  const currentFishes = getFilteredFishes({ fishes, tags, ownedFishes });
 
   return (
     <>
-      {isBasketShown &&
+      <CSSTransition in={isBasketShown} classNames="popup-transition" timeout={250} unmountOnExit>
         <Basket
           user={firebaseUser}
           setShowBasket={setIsBasketShown}
@@ -68,22 +73,24 @@ const App = () => {
           basketIds={basketIds}
           toggleFish={toggleId}
         />
-      }
-      {showLoginPopup &&
+      </CSSTransition>
+      <CSSTransition in={showLoginPopup} classNames="popup-transition" timeout={250} unmountOnExit>
         <Login user={firebaseUser} setShowLoginPopup={setShowLoginPopup}/>
-      }
-      <Header
-        userIcon={userIcon}
-        setShowBasket={setIsBasketShown}
-        basketIds={basketIds}
-        setShowLoginPopup={setShowLoginPopup}
-      />
-      {/* <FishPopup /> */}
+      </CSSTransition>
+      <CSSTransition in={isFishPopupOpened} classNames="popup-transition" timeout={250} unmountOnExit>
+        <FishPopup data={popupFishData} setFishPopup={setFishPopup}/>
+      </CSSTransition>
       <main>
+        <Header
+          userIcon={userIcon}
+          setShowBasket={setIsBasketShown}
+          basketIds={basketIds}
+          setShowLoginPopup={setShowLoginPopup}
+        />
         <Filters tags={tags} toggleTag={toggleTag} fishes={currentFishes} />
-        <BasketContext.Provider value={{basketIds, toggleId, ownedFishes}}>
+        <Context.Provider value={{basketIds, toggleId, ownedFishes, setFishPopup}}>
           <FishContainer fishes={currentFishes} tags={tags} />
-        </BasketContext.Provider>
+        </Context.Provider>
       </main>
     </>
   );

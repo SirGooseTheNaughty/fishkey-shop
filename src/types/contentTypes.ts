@@ -2,6 +2,7 @@ export interface ContentShort {
     id: string;
     name: string;
     description: string;
+    additional?: string;
     tags: string[];
     price: number;
     video: string;
@@ -17,6 +18,8 @@ export interface ContentExtended {
     }];
     code: string;
 }
+
+export interface ContentFull extends ContentShort, ContentExtended {}
 
 export interface User {
     id: string;

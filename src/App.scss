@@ -8,3 +8,25 @@ main {
   grid-template-columns: $col-grid-12;
   grid-column-gap: $col-gap-12;
 }
+
+.popup-transition-enter {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.popup-transition-enter.popup-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 300ms ease;
+}
+
+.popup-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 300ms ease;
+}
+
+.popup-transition-exit.popup-transition-exit-active {
+  opacity: 0;
+  transform: translateY(50px);
+}

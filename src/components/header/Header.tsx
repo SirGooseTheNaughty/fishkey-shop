@@ -40,6 +40,8 @@ export const Header = (props: Props) => {
       );
   }
 
+  console.log('header rerender');
+
   return (
     <div className="header" style={props.style}>
         <div className="content">

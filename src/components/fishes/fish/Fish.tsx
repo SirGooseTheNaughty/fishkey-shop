@@ -1,27 +1,21 @@
 import { useContext } from 'react';
 import "./fish.scss";
 import { ContentShort } from '../../../types/contentTypes';
-import shoppingCart from "../../../assets/images/shopping-cart.svg";
-import { BasketContext } from '../../../App';
+import { Context } from '../../../App';
 
 interface Props {
     data: ContentShort;
 }
 
 export const Fish = ({ data }: Props) => {
-  const { basketIds, toggleId: toggleIdInBasket, ownedFishes } = useContext(BasketContext);
-  // const { userStore, appStateStore } = React.useContext(MobXProviderContext);
-  const { id, name, description, price, video } = data;
+  const { basketIds, toggleId: toggleIdInBasket, ownedFishes, setFishPopup } = useContext(Context);
+  const { id, name, description, price, video, additional = null } = data;
 
   const hasThisFish = () => {
     return ownedFishes.find((fishId: string) => fishId === id);
   }
 
-  // const isInTheBasket = () => {
-  //   return appStateStore.basketFishIds.has(id);
-  // }
-
-  const ShoppingCart = () => <img src={shoppingCart} alt="shopping cart" width="25" height="25"></img>;
+  const ShoppingCart = () => <img src={"./shopping-cart.svg"} alt="shopping cart" width="25" height="25"></img>;
 
   const Arrow = () => {
     return (
@@ -48,7 +42,7 @@ export const Fish = ({ data }: Props) => {
     return (
       <div
         className="toInstruction"
-        // onClick={() => appStateStore.setPopupFishId(id)}
+        onClick={() => setFishPopup(id)}
       >
         Инструкция
       </div>
@@ -75,12 +69,24 @@ export const Fish = ({ data }: Props) => {
     );
   }
 
+  const AdditionalTooltip = () => {
+    return (
+      <div className="fish-tooltip">
+        <div className="fish-tooltip__tooltip">!</div>
+        <div className="fish-tooltip__info">{additional}</div>
+      </div>
+    )
+  }
+
   return (
     <div className="fish">
         <a href={video} className="videoLink">{PlayButton()}</a>
         <div className="content">
           <div className="title" style={name.split("").length > 30 ? {fontSize: "19px"} : {}}>{name}</div>
-          <div className="description">{description}</div>
+          <div className="description">
+            {additional && AdditionalTooltip()}
+            {description}
+          </div>
         </div>
       {hasThisFish() ? ToInstruction() : PriceAndBasket()}
     </div>

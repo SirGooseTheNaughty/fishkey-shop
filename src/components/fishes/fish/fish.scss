@@ -57,11 +57,7 @@
         font-weight: 200;
         color: $gray-1;
         margin-top: 15px;
-        // display: -webkit-box;
-        // -webkit-line-clamp: 3;
-        // -moz-box-orient: vertical;
-        // -webkit-box-orient: vertical;
-        // overflow: hidden;
+        position: relative;
     }
 
     .toInstruction,
@@ -104,6 +100,47 @@
             border-radius: 16px;
             font-size: $font-12;
             cursor: pointer;
+        }
+    }
+
+    .fish-tooltip {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 25px;
+        height: 25px;
+
+        &__tooltip {
+            width: 25px;
+            height: 25px;
+            display: grid;
+            place-items: center;
+            background-color: white;
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+            cursor: pointer;
+        }
+        
+        &__info {
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            max-width: 200px;
+            width: max-content;
+            padding: 10px;
+            z-index: 2;
+            transform: translate(-25px, -40px);
+            background-color: white;
+            border-radius: 15px;
+            color: $gray-1;
+            transition: opacity .25s ease;
+        }
+
+        &:hover .fish-tooltip__info {
+            opacity: 1;
+            pointer-events: auto;
         }
     }
 }

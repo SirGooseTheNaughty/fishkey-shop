@@ -5,11 +5,9 @@ import { Fish } from "./fish/Fish";
 
 interface FishContainerProps {
   fishes: ContentShort[];
-  addFishToBasket: (id: string) => void;
-  removefishFromBasket: (id: string) => void;
 }
 
-export const FishContainer = ({ fishes, addFishToBasket, removefishFromBasket }: FishContainerProps) => {
+export const FishContainer = ({ fishes }: FishContainerProps) => {
   const renderFish = (fish: ContentShort): React.ReactNode => {
     return <Fish data={fish} key={fish.id}/>
   }

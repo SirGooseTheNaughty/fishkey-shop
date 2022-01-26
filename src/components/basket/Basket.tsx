@@ -22,7 +22,7 @@ export const Basket = ({ user, fishes, basketIds, setShowBasket, toggleFish }: B
 
   const basketFish = (fish: ContentShort): React.ReactNode => {
     return (
-        <div className="basket__fish">
+        <div className="basket__fish" key={fish.id}>
             <div className="fish__name">{fish.name}</div>
             <div className="fish__price">{fish.price}</div>
             <div className="fish__delete" onClick={() => toggleFish(fish.id)}>
