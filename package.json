@@ -3,17 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.12.0",
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^12.8.3",
     "firebase": "^9.6.4",
-    "node-sass": "^5.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
+    "node-sass": "5.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-scripts": "5.0.0",
     "react-transition-group": "^4.4.2",
-    "sass-loader": "^10.1.1",
-    "tslib": "^2.2.0",
+    "sass-loader": "12.4.0",
+    "tslib": "2.3.1",
     "typedi": "^0.10.0",
     "web-vitals": "^1.1.1"
   },
@@ -47,8 +44,8 @@
     "@types/react-dom": "^17.0.3",
     "@types/webpack": "^4.41.27",
     "@types/webpack-env": "^1.16.0",
-    "ts-loader": "^9.1.0",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.2.4"
+    "ts-loader": "9.2.6",
+    "ts-node": "10.4.0",
+    "typescript": "4.5.5"
   }
 }
