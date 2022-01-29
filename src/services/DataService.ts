@@ -1,5 +1,5 @@
 import { db } from '../utils/firebase';
-import { collection, doc, getDocs, getDoc, setDoc, query, where } from "firebase/firestore";
+import { collection, doc, getDocs, getDoc, setDoc } from "firebase/firestore";
 import { ContentShort, ContentExtended, ContentFull } from "../types/contentTypes";
 
 export async function fetchShortData() {
