@@ -1,42 +1,7 @@
 @import "../../styles/styles.scss";
 
 .basket {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 3;
-    display: grid;
-    place-items: center;
-    background-color: $gray-basket;
-}
-
-.basket__content {
-    position: relative;
-    width: 760px;
-    background-color: white;
-    border-radius: 32px;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    padding: 50px 73px;
-
-    .basket__close {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 51px;
-        height: 51px;
-        border-radius: 50%;
-        background-color: $white-dark;
-        display: grid;
-        place-items: center;
-        transform: translate(50%, -50%);
-        cursor: pointer;
-    }
-
-    .basket__header {
+    &__header {
         font-family: $neutralface-bold;
         font-size: $font-20;
         font-weight: bold;
@@ -44,47 +9,47 @@
         margin-bottom: 32px;
     }
 
-    .basket__fishes {
+    &__fishes {
         width: 100%;
+    }
 
-        .basket__fish {
-            width: 100%;
-            height: 71px;
-            display: flex;
-            align-items: center;
-            background-color: $light-blue;
-            border-radius: 20px;
-            padding: 25px 30px;
-            box-sizing: border-box;
-            
-            &:not(:last-child) {
-                margin-bottom: 15px;
-            }
+    &__fish {
+        width: 100%;
+        height: 71px;
+        display: flex;
+        align-items: center;
+        background-color: $light-blue;
+        border-radius: 20px;
+        padding: 25px 30px;
+        box-sizing: border-box;
+        
+        &:not(:last-child) {
+            margin-bottom: 15px;
+        }
 
-            .fish__name {
-                text-transform: uppercase;
-                font-family: $neutralface-bold;
-                font-size: $font-20;
-                color: black;
-                margin-right: auto;
-            }
+        .fish__name {
+            text-transform: uppercase;
+            font-family: $neutralface-bold;
+            font-size: $font-20;
+            color: black;
+            margin-right: auto;
+        }
 
-            .fish__price {
-                text-transform: uppercase;
-                font-family: $inter;
-                font-size: $font-20;
-                color: $gray-1;
-                margin-right: 14px;
-            }
+        .fish__price {
+            text-transform: uppercase;
+            font-family: $inter;
+            font-size: $font-20;
+            color: $gray-1;
+            margin-right: 14px;
+        }
 
-            .fish__delete {
-                transform: translate(0, 2px);
-                cursor: pointer;
-            }
+        .fish__delete {
+            transform: translate(0, 2px);
+            cursor: pointer;
         }
     }
 
-    .basket__price {
+    &__price {
         font-family: $inter;
         font-size: $font-18;
         color: black;

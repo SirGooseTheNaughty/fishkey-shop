@@ -1,21 +1,24 @@
 @import "../../styles/styles.scss";
 
 .filters {
-    position: sticky;
+    position: fixed;
     top: 220px;
-    grid-column: 1 / 4;
-    height: 440px;
+    width: 260px;
+    margin-right: 40px;
     box-sizing: border-box;
-    padding: 60px 29px;
+    padding: 30px;
     background-color: $white-dark;
     border-radius: 30px;
+    font-size: $font-18;
+    font-family: $inter;
 
     &__header {
         font-family: $neutralface-bold;
         font-size: $font-20;
         color: $gray-1;
         font-weight: 800;
-        margin-bottom: 24px;
+        margin-top: 30px;
+        margin-bottom: 10px;
     }
 
     &__tags {
@@ -31,12 +34,16 @@
         margin-top: 11px;
         background-color: white;
         border-radius: 6px;
-        font-family: $inter;
-        font-size: $font-18;
         cursor: pointer;
+        transition: opacity .25s ease, background-color .25s ease;
+
+        &:hover {
+            background-color: $gray-2;
+        }
 
         &.disabled {
-            cursor: not-allowed;
+            pointer-events: none;
+            opacity: .6;
         }
     }
 
@@ -53,5 +60,26 @@
         border-radius: 50%;
         background-color: $white-dark;
         border-color: $gray-1;
+    }
+
+    &__checkbox {
+        display: flex;
+        align-items: center;
+        input {
+            appearance: none;
+            margin-right: 5px;
+        }
+        input::before {
+            content: "";
+            display: block;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px solid $gray-1; 
+        }
+        input:checked:before {
+            background-color: $dark-blue;
+        }
     }
 }

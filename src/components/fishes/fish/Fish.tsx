@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const Fish = ({ data }: Props) => {
-  const { basketIds, toggleId: toggleIdInBasket, ownedFishes, setFishPopup } = useContext(Context);
+  const { basketIds, toggleId: toggleIdInBasket, ownedFishes, setFishPopup, setVideo } = useContext(Context);
   const { id, name, description, price, video, additional = null } = data;
 
   const hasThisFish = () => {
@@ -41,7 +41,7 @@ export const Fish = ({ data }: Props) => {
   const ToInstruction = () => {
     return (
       <div
-        className="toInstruction"
+        className="fish__instruction"
         onClick={() => setFishPopup(id)}
       >
         Инструкция
@@ -51,8 +51,8 @@ export const Fish = ({ data }: Props) => {
 
   const PriceAndBasket = () => {
     return (
-      <div className="priceAndBasket">
-        <div className="price">{price}</div>
+      <div className="fish__priceAndBasket">
+        <div className="fish__price">{price}</div>
         {Basket()}
       </div>
     )
@@ -71,19 +71,19 @@ export const Fish = ({ data }: Props) => {
 
   const AdditionalTooltip = () => {
     return (
-      <div className="fish-tooltip">
-        <div className="fish-tooltip__tooltip">!</div>
-        <div className="fish-tooltip__info">{additional}</div>
+      <div className="fish__tooltip">
+        <div className="fish__tooltip-tooltip">!</div>
+        <div className="fish__tooltip-info">{additional}</div>
       </div>
     )
   }
 
   return (
     <div className="fish">
-        <a href={video} className="videoLink">{PlayButton()}</a>
-        <div className="content">
-          <div className="title" style={name.split("").length > 30 ? {fontSize: "19px"} : {}}>{name}</div>
-          <div className="description">
+        {video && <div onClick={() => setVideo(video)} className="fish__video">{PlayButton()}</div>}
+        <div className="fish__content">
+          <div className="fish__title" style={name.split("").length > 30 ? {fontSize: "19px"} : {}}>{name}</div>
+          <div className="fish__description">
             {additional && AdditionalTooltip()}
             {description}
           </div>

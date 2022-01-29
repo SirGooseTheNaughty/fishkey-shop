@@ -19,7 +19,7 @@ export interface ContentExtended {
     code: string;
 }
 
-export interface ContentFull extends ContentShort, ContentExtended {}
+export interface ContentFull extends Partial<ContentShort>, Partial<ContentExtended> {}
 
 export interface User {
     id: string;

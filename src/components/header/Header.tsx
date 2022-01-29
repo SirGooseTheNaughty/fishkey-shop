@@ -19,9 +19,8 @@ export const Header = (props: Props) => {
   const Basket = (numFishes: number) => {
       return (
           <div
-            className="header__basket"
+            className={numFishes ? 'header__basket active' : 'header__basket'}
             onClick={() => openBasket(numFishes)}
-            style={numFishes ? {cursor: 'pointer'} : {}}
         >
               <img src={"./shopping-cart.svg"} alt="shopping cart" width="25" height="25"></img>
               <span>{numFishes}</span>
@@ -40,15 +39,13 @@ export const Header = (props: Props) => {
       );
   }
 
-  console.log('header rerender');
-
   return (
     <div className="header" style={props.style}>
-        <div className="content">
-            <a href="#inst" className="link base-instruction">базовая инструкция</a>
-            <a href="#inst" className="link tech-support">тех. поддержка</a>
-            {UserPanel()}
+        <div className="header__content">
+            <a href="#inst" target="_blank" rel="noreferrer" className="header__link">базовая инструкция</a>
+            <a href="https://t.me/SirGooseTheNaughty" target="_blank" rel="noreferrer" className="header__link">тех. поддержка</a>
             {Basket(props.basketIds.size)}
+            {UserPanel()}
         </div>
     </div>
   )

@@ -46,9 +46,9 @@ export const Basket = ({ user, fishes, basketIds, setShowBasket, toggleFish }: B
   }
 
   return (
-    <div className="basket">
-        <div className="basket__content">
-            <div className="basket__close" onClick={() => setShowBasket(false)}>
+    <div className="basket popup">
+        <div className="popup__content">
+            <div className="popup__close" onClick={() => setShowBasket(false)}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M15 1L8 8M1 15L8 8M8 8L15 15L1 1" stroke="#333333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>

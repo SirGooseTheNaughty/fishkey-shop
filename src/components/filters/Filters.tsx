@@ -7,6 +7,8 @@ interface FiltersProps {
   tags: Set<string>;
   toggleTag: (tag: string) => void;
   fishes: ContentShort[];
+  hideNotBought: boolean;
+  setHideNotBought: (hideNotBought: boolean) => void;
 }
 
 export const Filters = (props: FiltersProps) => {
@@ -34,12 +36,25 @@ export const Filters = (props: FiltersProps) => {
       );
   }
 
+  const ShowOnlyMy = (): React.ReactNode => {
+    const { hideNotBought, setHideNotBought } = props;
+    const toggle = () => setHideNotBought(!hideNotBought);
+    return (
+      <div className="filters__checkbox">
+        <input type="checkbox" id="show-my-fishes" checked={hideNotBought} onChange={toggle} />
+        <label htmlFor="show-my-fishes">Только мои фишки</label>
+      </div>
+    )
+  }
+
   return (
     <div className="filters">
         <div className="filters__header">ТЕГИ</div>
         <div className="filters__tags">
             {TAGS.map(tag => Tag(tag))}
         </div>
+        <div className="filters__header">ФИЛЬТРАЦИЯ</div>
+        {ShowOnlyMy()}
     </div>
   )
 }

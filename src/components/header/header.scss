@@ -1,83 +1,106 @@
 @import "../../styles/styles.scss";
 
+.popup-opened .header {
+    padding-right: 97px !important;
+}
+
 .header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    padding: 0 80px 0 340px;
+    box-sizing: border-box;
     z-index: 2;
     background-color: $white-dark;
     box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
 
-    .content {
-        width: 1160px;
+    &__content {
+        width: 100%;
         height: 110px;
         margin: 0 auto;
+        display: flex;
+        align-items: center;
+    }
+    
+    &__link {
+        position: relative;
         display: grid;
         place-items: center baseline;
-        grid-template-columns: $col-grid-12;
-        grid-column-gap: $col-gap-12;
+        margin-right: 80px;
+        font-family: $neutralface-regular;
+        font-size: $font-20;
+        color: $gray-1;
+        font-weight: 600;
+
+        &::after {
+            content: "";
+            display: block;
+            height: 1px;
+            width: 0;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: $gray-1;
+            transition: width .25s ease;
+        }
+
+        &:hover::after {
+            width: 100%;
+        }
+    }
+
+    &__basket,
+    &__login {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 60px;
+        height: 60px;
+        background-color: $gray-2;
+        border-radius: 16px;
+        font-family: $inter;
+        font-size: $font-12;
+        transition: box-shadow .25s ease;
+    }
     
-        .link {
-            display: grid;
-            place-items: center baseline;
-            font-family: $neutralface-regular;
-            font-size: $font-20;
-            color: $gray-1;
-            font-weight: 600;
-    
-            &.base-instruction {
-                grid-column: 1 / span 3;
-            }
-    
-            &.tech-support {
-                grid-column: 4 / span 3;
+    &__basket {
+        margin-left: auto;
+        margin-right: 40px;
+
+        &.active {
+            cursor: pointer;
+
+            &:hover {
+                box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
             }
         }
 
-        .header__login {
-            position: relative;
-            grid-column: 11;
+        span {
+            position: absolute;
             display: grid;
             place-items: center;
-            width: 60px;
-            height: 60px;
-            background-color: $gray-2;
-            border-radius: 16px;
-            font-family: $inter;
-            font-size: $font-12;
-            overflow: hidden;
-
-            .fullsize {
-                width: 100%;
-                height: 100%;
-            }
+            width: 26px;
+            height: 26px;
+            background-color: $cart-number;
+            border-radius: 50%;
+            top: 100%;
+            left: 0;
+            transform: translate(-30%, -70%);
         }
-    
-        .header__basket {
-            position: relative;
-            grid-column: 12;
-            display: grid;
-            place-items: center;
-            width: 60px;
-            height: 60px;
-            background-color: $gray-2;
-            border-radius: 16px;
-            font-family: $inter;
-            font-size: $font-12;
-    
-            span {
-                position: absolute;
-                display: grid;
-                place-items: center;
-                width: 26px;
-                height: 26px;
-                background-color: $cart-number;
-                border-radius: 50%;
-                top: 100%;
-                left: 0;
-                transform: translate(-30%, -70%);
-            }
+    }
+
+    &__login {
+        overflow: hidden;
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        }
+
+        .fullsize {
+            width: 100%;
+            height: 100%;
         }
     }
 }

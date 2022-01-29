@@ -1,12 +1,54 @@
 @import "./styles/styles.scss";
 
 main {
-  display: grid;
-  width: 1160px;
   margin: 0 auto;
-  margin-top: 220px;
-  grid-template-columns: $col-grid-12;
-  grid-column-gap: $col-gap-12;
+  padding: 220px 40px 0 40px;
+}
+main > * {
+  transition: filter .3s ease;
+}
+.popup-opened {
+  overflow-y: hidden;
+  padding-right: 17px;
+}
+.popup-opened main > * {
+  filter: blur(10px) brightness(.9);
+}
+
+.popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 51px;
+    height: 51px;
+    border-radius: 50%;
+    background-color: $white-dark;
+    display: grid;
+    place-items: center;
+    transform: translate(50%, -50%);
+    cursor: pointer;
+  }
+
+  &__content {
+    position: relative;
+    width: 760px;
+    background-color: white;
+    border-radius: 32px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 50px 73px;
+  }
 }
 
 .popup-transition-enter {

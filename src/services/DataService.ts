@@ -1,6 +1,6 @@
 import { db } from '../utils/firebase';
 import { collection, doc, getDocs, getDoc, setDoc, query, where } from "firebase/firestore";
-import { ContentShort, ContentExtended } from "../types/contentTypes";
+import { ContentShort, ContentExtended, ContentFull } from "../types/contentTypes";
 
 export async function fetchShortData() {
     fetch('fishDB.json')
@@ -25,19 +25,16 @@ export async function fetchFishes() {
         });
 }
 
-export async function fetchFullFishes(ids) {
-    const fishesRef = collection(db, "fishes-full");
-    const q = query(fishesRef, where("id", "in", ids));
-    return getDocs(q)
-        .then((querySnapshot: any) => {
-            const fishes: any[] = [];
-            querySnapshot.forEach((doc: any) => {
-                const { name, description, tags, price, video } = doc.data();
-                const data = { id: doc.id, name, description, tags, price, video };
-                fishes.push(data);
+export async function fetchFullFishes(ids: string[]) {
+    const promises = ids.map(async id => {
+        return getDoc(doc(db, "fishes-full", id))
+            .then((doc: any) => {
+                const { prep, code, params } = doc.data();
+                const data = { id: doc.id, prep, code, params };
+                return data;
             });
-            return fishes;
-        });
+    });
+    return Promise.all(promises);
 }
 
 export async function fetchOwnedFishes(user) {
@@ -55,12 +52,13 @@ export async function fetchOwnedFishes(user) {
         });
 }
 
-export function mergeFishData(data: ContentShort[], addData: ContentExtended[]) {
+export function mergeFishData(data: ContentShort[], addData: ContentExtended[]): ContentFull[] {
     const extendedData = [...data];
-    addData.forEach((data: ContentExtended) => {
-        extendedData[data.id] = {
-            ...data[data.id],
-            ...data
+    addData.forEach((adata: ContentExtended) => {
+        const fishIndex = data.findIndex(fish => fish.id === adata.id);
+        extendedData[fishIndex] = {
+            ...data[fishIndex],
+            ...adata
         }
     });
     return extendedData;
