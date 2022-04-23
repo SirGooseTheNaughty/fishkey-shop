@@ -103,4 +103,11 @@
             height: 100%;
         }
     }
+
+    & .spinner {
+        position: absolute;
+        top: 50%;
+        left: 50px;
+        transform: translate(0, -50%);
+    }
 }

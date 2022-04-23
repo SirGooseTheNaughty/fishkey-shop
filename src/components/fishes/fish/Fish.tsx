@@ -8,11 +8,11 @@ interface Props {
 }
 
 export const Fish = ({ data }: Props) => {
-  const { basketIds, toggleId: toggleIdInBasket, ownedFishes, setFishPopup, setVideo } = useContext(Context);
+  const { basketIds, toggleId: toggleIdInBasket, ownedFishes, setFishPopup, setVideo, isAdmin } = useContext(Context);
   const { id, name, description, price, video, additional = null } = data;
 
   const hasThisFish = () => {
-    return ownedFishes.find((fishId: string) => fishId === id);
+    return isAdmin || ownedFishes.find((fishId: string) => fishId === id);
   }
 
   const ShoppingCart = () => <img src={"./shopping-cart.svg"} alt="shopping cart" width="25" height="25"></img>;

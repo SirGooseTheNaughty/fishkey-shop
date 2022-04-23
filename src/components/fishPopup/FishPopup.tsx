@@ -15,7 +15,7 @@ export const FishPopup = ({ data, setFishPopup }: FishPopupInterface): React.Rea
     
     const fishParam = (paramId: string, paramCont: string): React.ReactNode => {
         return (
-            <div className="fishPopup__item">
+            <div className="fishPopup__item" key={paramId}>
                 <div className="fishPopup__item-name">{FISH_DESC_NAMES[paramId]}</div>
                 <div className="fishPopup__item-content">{paramCont}</div>
             </div>
@@ -24,7 +24,7 @@ export const FishPopup = ({ data, setFishPopup }: FishPopupInterface): React.Rea
 
     const fishInit = (inits: any[]): React.ReactNode => {
         return (
-            <div className="fishPopup__item">
+            <div className="fishPopup__item" key='init'>
                 <div className="fishPopup__item-name">{FISH_DESC_NAMES["params"]}</div>
                 <div className="fishPopup__item-content">
                     {inits && inits.map(init => {

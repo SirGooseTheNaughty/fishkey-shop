@@ -1,6 +1,10 @@
 import { db } from '../utils/firebase';
 import { collection, doc, getDocs, getDoc, setDoc } from "firebase/firestore";
 import { ContentShort, ContentExtended, ContentFull } from "../types/contentTypes";
+import { USER_ROLES } from '../hooks/useUser';
+import { User } from '../types/contentTypes';
+
+const defaultFishes = ['differ-on-browser', 'join-elements'];
 
 export async function fetchShortData() {
     fetch('fishDB.json')
@@ -25,8 +29,21 @@ export async function fetchFishes() {
         });
 }
 
-export async function fetchFullFishes(ids: string[]) {
-    const promises = ids.map(async id => {
+export async function fetchFullFishes(userData: User) {
+    const { ownedFish, role } = userData;
+    if (role === USER_ROLES.admin) {
+        return getDocs(collection(db, "fishes-full"))
+            .then((querySnapshot: any) => {
+                const fishes: any[] = [];
+                querySnapshot.forEach((doc: any) => {
+                    const { prep, code, params } = doc.data();
+                    const data = { id: doc.id, prep, code, params };
+                    fishes.push(data);
+                });
+                return fishes;
+            });
+    }
+    const promises = ownedFish.map(async id => {
         return getDoc(doc(db, "fishes-full", id))
             .then((doc: any) => {
                 const { prep, code, params } = doc.data();
@@ -37,18 +54,18 @@ export async function fetchFullFishes(ids: string[]) {
     return Promise.all(promises);
 }
 
-export async function fetchOwnedFishes(user) {
+export async function fetchUserData(user) {
     return getDoc(doc(db, "users", user.email))
         .then((docSnapshot: any) => {
-            let ownedFish = [];
             if (docSnapshot.exists()) {
-                ownedFish = docSnapshot.data().ownedFish;
+                const { ownedFish, role } = docSnapshot.data();
+                return { ownedFish, role };
             } else {
                 setDoc(doc(db, "users", user.email), {
-                    ownedFish: ['differ-on-browser', 'join-elements']
+                    ownedFish: defaultFishes
                 });
+                return { ownedFish: defaultFishes, role: USER_ROLES.user };
             }
-            return ownedFish;
         });
 }
 

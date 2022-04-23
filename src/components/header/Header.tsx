@@ -1,5 +1,6 @@
 import React from 'react';
 import "./header.scss";
+import Spinner from '../spinner/Spinner';
 
 interface Props {
     style: object;
@@ -7,6 +8,7 @@ interface Props {
     setShowBasket: (showBasket: boolean) => void;
     basketIds: Set<any>;
     setShowLoginPopup: (showPopup: boolean) => void;
+    isLoading: boolean;
 }
 
 export const Header = (props: Props) => {
@@ -34,13 +36,14 @@ export const Header = (props: Props) => {
             className="header__login"
             onClick={() => props.setShowLoginPopup(true)}
         >
-            <img src={props.userIcon} alt="user profile" width="25" height="25" className={props.userIcon !== './user.png' ? 'fullsize' : ''} ></img>
+            <img src={props.userIcon} alt="" width="25" height="25" className={props.userIcon !== './user.png' ? 'fullsize' : ''} ></img>
         </div>
       );
   }
 
   return (
     <div className="header" style={props.style}>
+        {props.isLoading && <Spinner size='64px' />}
         <div className="header__content">
             <a href="#inst" target="_blank" rel="noreferrer" className="header__link">базовая инструкция</a>
             <a href="https://t.me/SirGooseTheNaughty" target="_blank" rel="noreferrer" className="header__link">тех. поддержка</a>

@@ -8,7 +8,7 @@ import { Basket } from "./components/basket/Basket";
 import { FishPopup } from "./components/fishPopup/FishPopup";
 import { Login } from "./components/loginPopup/Login";
 import { getAuth } from "firebase/auth";
-import { fetchFishes, fetchOwnedFishes, fetchFullFishes, mergeFishData } from './services/DataService';
+import { fetchFishes, fetchUserData, fetchFullFishes, mergeFishData } from './services/DataService';
 import { getFilteredFishes } from './services/DataFlowService';
 import { VideoPopup } from './components/videoPopup/VideoPopup';
 import useBasket from './hooks/useBasket';
@@ -24,11 +24,13 @@ export const Context = createContext({
   toggleId: null,
   ownedFishes: null,
   setFishPopup: null,
-  setVideo: null
+  setVideo: null,
+  isAdmin: false
 });
 
 const App = () => {
-  const [firebaseUser, ownedFishes, userIcon] = useUser();
+  const [isLoading, setIsLoading] = useState(true);
+  const [firebaseUser, ownedFishes, userIcon, isAdmin] = useUser();
   const [fishes, setFishes] = useState([]);
   const [shouldFetchFullFishes, setShouldFetchFullFishes] = useState(true);
   const [basketIds, toggleId, isBasketShown, setIsBasketShown] = useBasket();
@@ -40,9 +42,11 @@ const App = () => {
 
   useEffect(() => {
     if (!fishes.length) {
+      setIsLoading(true);
       fetchFishes()
         .then(data => setFishes(data))
-        .catch(err => console.error(err));
+        .catch(err => console.error(err))
+        .finally(() => setIsLoading(false));
     }
   }, [fishes]);
   
@@ -58,12 +62,16 @@ const App = () => {
   
   useEffect(() => {
     if (shouldFetchFullFishes && fishes.length) {
-      fetchOwnedFishes(firebaseUser)
-        .then(ownedIds => fetchFullFishes(ownedIds))
+      setIsLoading(true);
+      fetchUserData(firebaseUser)
+        .then((userData) => fetchFullFishes(userData))
         .then(addData => mergeFishData(fishes, addData))
         .then(fishes => setFishes(fishes))
         .catch(err => console.error(err))
-        .finally(() => setShouldFetchFullFishes(false));
+        .finally(() => {
+          setShouldFetchFullFishes(false);
+          setIsLoading(false);
+        });
     }
   }, [ownedFishes, fishes, shouldFetchFullFishes, firebaseUser]);
 
@@ -103,9 +111,10 @@ const App = () => {
           setShowBasket={setIsBasketShown}
           basketIds={basketIds}
           setShowLoginPopup={setShowLoginPopup}
+          isLoading={isLoading}
         />
         <Filters tags={tags} toggleTag={toggleTag} fishes={currentFishes} hideNotBought={hideNotBought} setHideNotBought={setHideNotBought} />
-        <Context.Provider value={{basketIds, toggleId, ownedFishes, setFishPopup, setVideo}}>
+        <Context.Provider value={{basketIds, toggleId, ownedFishes, setFishPopup, setVideo, isAdmin}}>
           <FishContainer fishes={currentFishes} tags={tags} />
         </Context.Provider>
       </main>

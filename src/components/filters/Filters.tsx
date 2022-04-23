@@ -29,6 +29,7 @@ export const Filters = (props: FiltersProps) => {
             className={`filters__tag ${!isClickable ? 'disabled' : ''}`}
             onClick={isClickable ? () => props.toggleTag(tag) : null}
             style={style}
+            key={tag}
           >
             {tag}
             {number !== 0 && <div className="filters__number">{number}</div>}
@@ -51,7 +52,7 @@ export const Filters = (props: FiltersProps) => {
     <div className="filters">
         <div className="filters__header">ТЕГИ</div>
         <div className="filters__tags">
-            {TAGS.map(tag => Tag(tag))}
+            {TAGS.map(Tag)}
         </div>
         <div className="filters__header">ФИЛЬТРАЦИЯ</div>
         {ShowOnlyMy()}
